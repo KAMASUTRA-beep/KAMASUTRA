@@ -1,74 +1,230 @@
 
-
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101018">
-  <meta name="description" content="KAMASUTRA — Maison de création. Découvrez Noir Éternel, Rose Sculpté et Éclat d'Or : 30 créations conceptuelles de lingerie de luxe.">
-  <title>KAMASUTRA — Maison de création</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Collections photographiques */
-    .collection-photo {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: #211b20;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101018">
+<meta name="description" content="KAMASUTRA — Maison de création. Découvrez les collections conceptuelles Noir Éternel, Rose Sculpté et Éclat d'Or.">
+<title>KAMASUTRA — Maison de création</title>
+<link rel="stylesheet" href="styles.css">
 
-    .collection-photo img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .5s ease;
-    }
+<style>
+/* DIAPORAMA PREMIUM KAMASUTRA */
 
-    .collection-photo:hover img {
-      transform: scale(1.04);
-    }
+.kama-showcase {
+  position: relative;
+  width: 100%;
+  height: min(78svh, 760px);
+  min-height: 470px;
+  overflow: hidden;
+  background: #111016;
+  isolation: isolate;
+}
 
-    .collection-discover {
-      display: block;
-      padding: 18px 22px;
-      color: #d8b77c;
-      text-decoration: none;
-      border-top: 1px solid rgba(216,183,124,.25);
-      font-size: 14px;
-      letter-spacing: .04em;
-    }
+.kama-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease, visibility 1.2s;
+}
 
-    .collection-discover:hover {
-      color: #fff;
-    }
+.kama-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-    .collection-card {
-      overflow: hidden;
-    }
+.kama-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 
-    @media (max-width: 768px) {
-      .collection-grid {
-        gap: 26px;
-      }
+.kama-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(12,11,16,.06) 5%,
+    rgba(12,11,16,.25) 42%,
+    rgba(12,11,16,.88) 100%
+  );
+}
 
-      .collection-photo {
-        aspect-ratio: 4 / 4.5;
-      }
-    }
-  </style>
+.kama-slide-copy {
+  position: absolute;
+  bottom: 115px;
+  left: 7%;
+  right: 7%;
+  z-index: 2;
+  color: #f5eee7;
+}
+
+.kama-slide-copy .kicker {
+  color: #d8b77c;
+  letter-spacing: .22em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.kama-slide-copy h2 {
+  font-family: Georgia,serif;
+  font-size: clamp(38px,7vw,78px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 16px 0;
+  color: #fff5eb;
+}
+
+.kama-slide-copy p {
+  font-size: clamp(15px,2.5vw,19px);
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.kama-slide-copy a {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 15px 23px;
+  border: 1px solid #d8b77c;
+  color: #e5c48c;
+  text-decoration: none;
+  letter-spacing: .04em;
+  font-size: 14px;
+}
+
+.kama-slide-copy a:hover {
+  background: #d8b77c;
+  color: #101018;
+}
+
+.kama-controls {
+  position: absolute;
+  bottom: 34px;
+  left: 7%;
+  right: 7%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kama-dots {
+  display: flex;
+  gap: 12px;
+}
+
+.kama-dot {
+  width: 34px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(255,255,255,.4);
+  cursor: pointer;
+}
+
+.kama-dot.active {
+  background: #d8b77c;
+}
+
+.kama-arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.kama-arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(216,183,124,.6);
+  border-radius: 50%;
+  background: rgba(15,14,20,.55);
+  color: #f1d4a1;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.kama-collection-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+
+.kama-image-link {
+  display: block;
+  overflow: hidden;
+  background: #231d23;
+}
+
+.kama-image-link:hover img {
+  transform: scale(1.04);
+}
+
+.kama-collection-link {
+  display: block;
+  color: #d8b77c;
+  padding: 16px 20px;
+  text-decoration: none;
+  border-top: 1px solid rgba(216,183,124,.2);
+}
+
+.kama-all-collections {
+  text-align: center;
+  margin-top: 42px;
+}
+
+@media(max-width:768px) {
+  .kama-showcase {
+    height: 68svh;
+    min-height: 480px;
+    max-height: 680px;
+  }
+
+  .kama-slide-copy {
+    bottom: 105px;
+    left: 6%;
+    right: 6%;
+  }
+
+  .kama-slide-copy h2 {
+    font-size: clamp(36px,9vw,55px);
+  }
+
+  .kama-slide-copy p {
+    font-size: 15px;
+  }
+
+  .kama-controls {
+    left: 6%;
+    right: 6%;
+    bottom: 28px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .kama-slide,
+  .kama-collection-image {
+    transition: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="announcement">
-  MAISON DE CRÉATION
-  <span>✦</span>
-  COLLECTIONS CONCEPTUELLES
-  <span>✦</span>
-  KAMA À VENIR
+MAISON DE CRÉATION
+<span>✦</span>
+COLLECTIONS CONCEPTUELLES
+<span>✦</span>
+KAMA À VENIR
 </div>
 
 <header class="header" id="haut">
@@ -97,405 +253,409 @@
 
 <main>
 
-  <!-- ACCUEIL -->
+<!-- DIAPORAMA D'ACCUEIL -->
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-art" aria-hidden="true">
-      <div class="halo"></div>
-      <div class="sculpture sculpture-one"></div>
-      <div class="sculpture sculpture-two"></div>
-      <div class="orbit orbit-one"></div>
-      <div class="orbit orbit-two"></div>
-      <span class="art-label">ÉDITION CONCEPTUELLE · 001</span>
-    </div>
+<section class="kama-showcase"
+  aria-label="Présentation des collections KAMASUTRA"
+  aria-roledescription="carrousel">
 
-    <div class="hero-content">
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
-        L'ÉLÉGANCE RENCONTRE L'AVENIR
-      </div>
+  <div class="kama-slide active">
+    <img src="noir-01.png"
+      alt="Collection Noir Éternel — lingerie noire raffinée"
+      fetchpriority="high">
 
-      <h1 id="hero-title">
-        L'art de <em>révéler</em><br>
-        votre singularité.
-      </h1>
-
+    <div class="kama-slide-copy">
+      <span class="kicker">Collection signature 01 / 03</span>
+      <h2>Noir Éternel</h2>
       <p>
-        Une nouvelle vision de la lingerie :
-        audacieuse, raffinée et pensée pour celles
-        et ceux qui choisissent leur propre
-        définition du luxe.
+        L'intensité du noir, la délicatesse
+        de la dentelle et une élégance intemporelle.
       </p>
-
-      <div class="hero-actions">
-        <a class="button gold" href="#collections">
-          Explorer les collections <span>↗</span>
-        </a>
-        <a class="text-link" href="#vision">
-          Découvrir notre vision <span>↗</span>
-        </a>
-      </div>
-
-      <div class="hero-bottom">
-        <span>01 / 03</span>
-        <span>CRÉATION · EXPRESSION · COMMUNAUTÉ</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOTRE UNIVERS -->
-
-  <section class="manifesto section" id="univers">
-    <p class="section-kicker">01 — NOTRE UNIVERS</p>
-
-    <div class="manifesto-layout">
-      <h2>Le luxe est une <em>attitude.</em></h2>
-
-      <div>
-        <p>
-          Chez KAMASUTRA, nous imaginons un univers
-          où le design rencontre la liberté
-          d'expression. Des lignes sculpturales,
-          des matières imaginées avec soin et
-          une esthétique qui traverse les tendances.
-        </p>
-
-        <p class="muted">
-          Le projet est en phase de création.
-          Les visuels et les collections présentés
-          ici sont des directions artistiques,
-          et non des produits actuellement
-          disponibles à la vente.
-        </p>
-
-        <a class="under-link" href="#vision">
-          Notre philosophie <span>↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOS TROIS COLLECTIONS -->
-
-  <section class="collections section" id="collections">
-    <div class="section-top">
-      <div>
-        <p class="section-kicker">
-          02 — COLLECTIONS SIGNATURE 2027
-        </p>
-        <h2>Des univers à <em>explorer.</em></h2>
-      </div>
-
-      <p>
-        30 créations conceptuelles.
-        Trois univers. Une signature.
-        Découvrez nos premières inspirations
-        de lingerie de luxe.
-      </p>
-    </div>
-
-    <div class="collection-grid">
-
-      <!-- NOIR ÉTERNEL -->
-
-      <article class="collection-card card-noir">
-        <a class="collection-photo" href="collections.html#noir">
-          <img
-            src="noir-01.png"
-            alt="Noir Éternel — lingerie de luxe noire"
-            loading="lazy"
-          >
-        </a>
-
-        <div class="collection-meta">
-          <div>
-            <h3>Noir Éternel</h3>
-            <p>10 créations · Mystère · Élégance</p>
-          </div>
-        </div>
-
-        <a class="collection-discover" href="collections.html#noir">
-          Découvrir les 10 créations ↗
-        </a>
-      </article>
-
-      <!-- ROSE SCULPTÉ -->
-
-      <article class="collection-card card-rose">
-        <a class="collection-photo" href="collections.html#rose">
-          <img
-            src="rose-01.png"
-            alt="Rose Sculpté — lingerie rose raffinée"
-            loading="lazy"
-          >
-        </a>
-
-        <div class="collection-meta">
-          <div>
-            <h3>Rose Sculpté</h3>
-            <p>10 créations · Douceur · Raffinement</p>
-          </div>
-        </div>
-
-        <a class="collection-discover" href="collections.html#rose">
-          Découvrir les 10 créations ↗
-        </a>
-      </article>
-
-      <!-- ÉCLAT D'OR -->
-
-      <article class="collection-card card-or">
-        <a class="collection-photo" href="collections.html#or">
-          <img
-            src="or-01.png"
-            alt="Éclat d'Or — lingerie champagne et or"
-            loading="lazy"
-          >
-        </a>
-
-        <div class="collection-meta">
-          <div>
-            <h3>Éclat d'Or</h3>
-            <p>10 créations · Lumière · Prestige</p>
-          </div>
-        </div>
-
-        <a class="collection-discover" href="collections.html#or">
-          Découvrir les 10 créations ↗
-        </a>
-      </article>
-
-    </div>
-
-    <div style="text-align:center;margin-top:45px">
-      <a class="button gold" href="collections.html">
-        Voir les 30 créations <span>↗</span>
+      <a href="collections.html#noir">
+        Découvrir Noir Éternel ↗
       </a>
     </div>
-  </section>
+  </div>
 
-  <!-- NOTRE VISION -->
+  <div class="kama-slide" aria-hidden="true">
+    <img src="rose-01.png"
+      alt="Collection Rose Sculpté — lingerie rose délicate"
+      loading="lazy">
 
-  <section class="vision section" id="vision">
-    <div class="vision-emblem" aria-hidden="true">
-      <span>K</span>
-      <div class="emblem-ring"></div>
+    <div class="kama-slide-copy">
+      <span class="kicker">Collection signature 02 / 03</span>
+      <h2>Rose Sculpté</h2>
+      <p>
+        Une harmonie de douceur, de lignes
+        délicates et de féminité contemporaine.
+      </p>
+      <a href="collections.html#rose">
+        Découvrir Rose Sculpté ↗
+      </a>
+    </div>
+  </div>
+
+  <div class="kama-slide" aria-hidden="true">
+    <img src="or-01.png"
+      alt="Collection Éclat d'Or — lingerie champagne et dorée"
+      loading="lazy">
+
+    <div class="kama-slide-copy">
+      <span class="kicker">Collection signature 03 / 03</span>
+      <h2>Éclat d'Or</h2>
+      <p>
+        L'éclat des nuances dorées,
+        le raffinement et l'expression du prestige.
+      </p>
+      <a href="collections.html#or">
+        Découvrir Éclat d'Or ↗
+      </a>
+    </div>
+  </div>
+
+  <div class="kama-controls">
+    <div class="kama-dots" aria-label="Choisir une collection">
+      <button class="kama-dot active"
+        type="button" data-slide="0"
+        aria-label="Afficher Noir Éternel"
+        aria-current="true"></button>
+      <button class="kama-dot"
+        type="button" data-slide="1"
+        aria-label="Afficher Rose Sculpté"></button>
+      <button class="kama-dot"
+        type="button" data-slide="2"
+        aria-label="Afficher Éclat d'Or"></button>
     </div>
 
-    <div class="vision-copy">
-      <p class="section-kicker">03 — NOTRE VISION</p>
+    <div class="kama-arrows">
+      <button class="kama-arrow" id="kamaPrev"
+        type="button" aria-label="Collection précédente">‹</button>
+      <button class="kama-arrow" id="kamaNext"
+        type="button" aria-label="Collection suivante">›</button>
+    </div>
+  </div>
+</section>
 
-      <h2>
-        Une maison qui se construit
-        <em>avec vous.</em>
-      </h2>
+<!-- INTRODUCTION -->
 
+<section class="manifesto section" id="univers">
+  <p class="section-kicker">01 — NOTRE UNIVERS</p>
+
+  <div class="manifesto-layout">
+    <h2>Le luxe est une <em>attitude.</em></h2>
+
+    <div>
       <p>
-        Nous souhaitons réunir création,
-        expression personnelle et participation
-        communautaire. À terme, notre communauté
-        pourrait contribuer à sélectionner
-        certaines orientations de futures collections.
+        Chez KAMASUTRA, nous imaginons un univers
+        où le design rencontre la liberté d'expression.
+        Des lignes sculpturales, des matières imaginées
+        avec soin et une esthétique qui traverse
+        les tendances.
       </p>
 
-      <div class="vision-points">
-        <div>
-          <strong>01</strong>
-          <span>Création<br>contemporaine</span>
-        </div>
-        <div>
-          <strong>02</strong>
-          <span>Identité<br>singulière</span>
-        </div>
-        <div>
-          <strong>03</strong>
-          <span>Communauté<br>engagée</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOUTIQUES 2027 -->
-
-  <section class="locations section" id="implantations"
-    aria-labelledby="locations-title">
-
-    <div class="section-top">
-      <div>
-        <p class="section-kicker">
-          04 — DÉVELOPPEMENT INTERNATIONAL
-        </p>
-        <h2 id="locations-title">
-          Nos futures <em>boutiques.</em>
-        </h2>
-      </div>
-
-      <p>
-        KAMASUTRA prépare son développement
-        international avec quatre projets
-        de boutiques physiques de lingerie
-        haut de gamme, au Maroc, en France
-        et au Royaume-Uni, courant 2027.
+      <p class="muted">
+        Le projet est en phase de création.
+        Les visuels et collections présentés
+        sont des directions artistiques,
+        et non des produits actuellement disponibles
+        à la vente.
       </p>
+
+      <a class="under-link" href="#vision">
+        Notre philosophie <span>↗</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    <div class="locations-grid">
+<!-- COLLECTIONS -->
 
-      <article class="location-card">
-        <span class="location-country">MAROC</span>
-        <h3>Casablanca</h3>
-        <p>Ouverture envisagée courant 2027</p>
-        <span class="location-tag">
-          BOUTIQUE PHYSIQUE — PROJET
-        </span>
-      </article>
-
-      <article class="location-card">
-        <span class="location-country">MAROC</span>
-        <h3>Marrakech</h3>
-        <p>Ouverture envisagée courant 2027</p>
-        <span class="location-tag">
-          BOUTIQUE PHYSIQUE — PROJET
-        </span>
-      </article>
-
-      <article class="location-card">
-        <span class="location-country">FRANCE</span>
-        <h3>Paris</h3>
-        <p>Ouverture envisagée courant 2027</p>
-        <span class="location-tag">
-          BOUTIQUE PHYSIQUE — PROJET
-        </span>
-      </article>
-
-      <article class="location-card">
-        <span class="location-country">ROYAUME-UNI</span>
-        <h3>Londres</h3>
-        <p>Ouverture envisagée courant 2027</p>
-        <span class="location-tag">
-          BOUTIQUE PHYSIQUE — PROJET
-        </span>
-      </article>
-
+<section class="collections section" id="collections">
+  <div class="section-top">
+    <div>
+      <p class="section-kicker">
+        02 — COLLECTIONS SIGNATURE
+      </p>
+      <h2>30 créations à <em>découvrir.</em></h2>
     </div>
-
-    <p class="locations-disclaimer">
-      Calendrier prévisionnel et non confirmé.
-      Les adresses, dates exactes et modalités
-      d'ouverture seront annoncées ultérieurement.
-      Ces boutiques physiques sont à l'état
-      de projet ; aucune n'est annoncée
-      comme actuellement ouverte.
-    </p>
-  </section>
-
-  <!-- KAMA TOKEN -->
-
-  <section class="token section" id="kama">
-    <div class="token-glow" aria-hidden="true"></div>
-
-    <div class="token-header">
-      <div>
-        <p class="section-kicker">
-          05 — L'AVENIR DE LA COMMUNAUTÉ
-        </p>
-        <h2>Découvrez <em>KAMA.</em></h2>
-      </div>
-
-      <span class="status">
-        <span class="status-dot"></span>
-        PROJET EN PRÉPARATION
-      </span>
-    </div>
-
-    <div class="token-body">
-      <div>
-        <p>
-          KAMA est un projet de token destiné
-          à accompagner, à terme, l'expérience
-          communautaire de KAMASUTRA.
-          Son lancement n'a pas encore eu lieu.
-        </p>
-
-        <p class="muted">
-          Les fonctionnalités envisagées,
-          notamment la participation à certains
-          votes créatifs, restent à définir.
-          Aucune vente, cotation ni promesse
-          de rendement n'est proposée sur ce site.
-        </p>
-
-        <a href="#contact" class="button outline">
-          Suivre les actualités <span>↗</span>
-        </a>
-      </div>
-
-      <div class="token-facts">
-        <div>
-          <span>NOM</span>
-          <strong>KAMASUTRA</strong>
-        </div>
-        <div>
-          <span>SYMBOLE</span>
-          <strong>KAMA</strong>
-        </div>
-        <div>
-          <span>RÉSEAUX ENVISAGÉS</span>
-          <strong>BNB Smart Chain et Ethereum</strong>
-        </div>
-        <div>
-          <span>OFFRE PRÉVUE SUR BNB</span>
-          <strong>100 000 000 KAMA</strong>
-        </div>
-        <div>
-          <span>OFFRE PRÉVUE SUR ETHEREUM</span>
-          <strong>100 000 000 KAMA</strong>
-        </div>
-        <div>
-          <span>STATUT</span>
-          <strong>Non déployé sur les réseaux principaux</strong>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-
-  <section class="contact section" id="contact">
-    <p class="section-kicker">
-      06 — RESTONS CONNECTÉS
-    </p>
-
-    <h2>Le début d'une <em>histoire.</em></h2>
 
     <p>
-      Pour découvrir les prochaines étapes
-      de la maison, enregistrer cette page
-      ou nous contacter lorsque nos coordonnées
-      officielles seront publiées.
+      Trois univers distincts, dix modèles
+      conceptuels par collection.
+      Une même signature : KAMASUTRA.
+    </p>
+  </div>
+
+  <div class="collection-grid">
+
+    <article class="collection-card card-noir">
+      <a href="collections.html#noir" class="kama-image-link">
+        <img class="kama-collection-image"
+          src="noir-01.png"
+          alt="Noir Éternel — première création"
+          loading="lazy">
+      </a>
+      <div class="collection-meta">
+        <div>
+          <h3>Noir Éternel</h3>
+          <p>10 créations · Mystère · Élégance</p>
+        </div>
+      </div>
+      <a class="kama-collection-link"
+        href="collections.html#noir">
+        Explorer les 10 modèles ↗
+      </a>
+    </article>
+
+    <article class="collection-card card-rose">
+      <a href="collections.html#rose" class="kama-image-link">
+        <img class="kama-collection-image"
+          src="rose-01.png"
+          alt="Rose Sculpté — première création"
+          loading="lazy">
+      </a>
+      <div class="collection-meta">
+        <div>
+          <h3>Rose Sculpté</h3>
+          <p>10 créations · Douceur · Raffinement</p>
+        </div>
+      </div>
+      <a class="kama-collection-link"
+        href="collections.html#rose">
+        Explorer les 10 modèles ↗
+      </a>
+    </article>
+
+    <article class="collection-card card-or">
+      <a href="collections.html#or" class="kama-image-link">
+        <img class="kama-collection-image"
+          src="or-01.png"
+          alt="Éclat d'Or — première création"
+          loading="lazy">
+      </a>
+      <div class="collection-meta">
+        <div>
+          <h3>Éclat d'Or</h3>
+          <p>10 créations · Lumière · Prestige</p>
+        </div>
+      </div>
+      <a class="kama-collection-link"
+        href="collections.html#or">
+        Explorer les 10 modèles ↗
+      </a>
+    </article>
+
+  </div>
+
+  <div class="kama-all-collections">
+    <a class="button gold" href="collections.html">
+      Découvrir les 30 créations <span>↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- VISION -->
+
+<section class="vision section" id="vision">
+  <div class="vision-emblem" aria-hidden="true">
+    <span>K</span>
+    <div class="emblem-ring"></div>
+  </div>
+
+  <div class="vision-copy">
+    <p class="section-kicker">03 — NOTRE VISION</p>
+    <h2>
+      Une maison qui se construit
+      <em>avec vous.</em>
+    </h2>
+    <p>
+      Nous souhaitons réunir création,
+      expression personnelle et participation
+      communautaire. À terme, notre communauté
+      pourrait contribuer à sélectionner certaines
+      orientations de futures collections.
     </p>
 
-    <div class="contact-actions">
-      <button class="button gold" id="copySite">
-        Copier l'adresse du site <span>↗</span>
-      </button>
+    <div class="vision-points">
+      <div>
+        <strong>01</strong>
+        <span>Création<br>contemporaine</span>
+      </div>
+      <div>
+        <strong>02</strong>
+        <span>Identité<br>singulière</span>
+      </div>
+      <div>
+        <strong>03</strong>
+        <span>Communauté<br>engagée</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <span id="copyFeedback"
-        role="status"
-        aria-live="polite"></span>
+<!-- BOUTIQUES -->
+
+<section class="locations section" id="implantations"
+  aria-labelledby="locations-title">
+
+  <div class="section-top">
+    <div>
+      <p class="section-kicker">
+        04 — DÉVELOPPEMENT INTERNATIONAL
+      </p>
+      <h2 id="locations-title">
+        Nos futures <em>boutiques.</em>
+      </h2>
     </div>
 
-    <p class="contact-note">
-      Les inscriptions à une newsletter et
-      les commandes seront activées uniquement
-      lorsqu'un service sécurisé et des
-      coordonnées officielles auront été configurés.
+    <p>
+      KAMASUTRA prépare son développement international
+      avec quatre projets de boutiques physiques
+      de lingerie haut de gamme, au Maroc,
+      en France et au Royaume-Uni, courant 2027.
     </p>
-  </section>
+  </div>
+
+  <div class="locations-grid">
+    <article class="location-card">
+      <span class="location-country">MAROC</span>
+      <h3>Casablanca</h3>
+      <p>Ouverture envisagée courant 2027</p>
+      <span class="location-tag">BOUTIQUE PHYSIQUE — PROJET</span>
+    </article>
+
+    <article class="location-card">
+      <span class="location-country">MAROC</span>
+      <h3>Marrakech</h3>
+      <p>Ouverture envisagée courant 2027</p>
+      <span class="location-tag">BOUTIQUE PHYSIQUE — PROJET</span>
+    </article>
+
+    <article class="location-card">
+      <span class="location-country">FRANCE</span>
+      <h3>Paris</h3>
+      <p>Ouverture envisagée courant 2027</p>
+      <span class="location-tag">BOUTIQUE PHYSIQUE — PROJET</span>
+    </article>
+
+    <article class="location-card">
+      <span class="location-country">ROYAUME-UNI</span>
+      <h3>Londres</h3>
+      <p>Ouverture envisagée courant 2027</p>
+      <span class="location-tag">BOUTIQUE PHYSIQUE — PROJET</span>
+    </article>
+  </div>
+
+  <p class="locations-disclaimer">
+    Calendrier prévisionnel et non confirmé.
+    Les adresses, dates exactes et modalités
+    d'ouverture seront annoncées ultérieurement.
+    Ces boutiques physiques sont à l'état de projet ;
+    aucune n'est annoncée comme actuellement ouverte.
+  </p>
+</section>
+
+<!-- TOKEN KAMA -->
+
+<section class="token section" id="kama">
+  <div class="token-glow" aria-hidden="true"></div>
+
+  <div class="token-header">
+    <div>
+      <p class="section-kicker">
+        05 — L'AVENIR DE LA COMMUNAUTÉ
+      </p>
+      <h2>Découvrez <em>KAMA.</em></h2>
+    </div>
+
+    <span class="status">
+      <span class="status-dot"></span>
+      PROJET EN PRÉPARATION
+    </span>
+  </div>
+
+  <div class="token-body">
+    <div>
+      <p>
+        KAMA est un projet de token destiné
+        à accompagner, à terme, l'expérience
+        communautaire de KAMASUTRA.
+        Son lancement n'a pas encore eu lieu.
+      </p>
+
+      <p class="muted">
+        Les fonctionnalités envisagées, notamment
+        la participation à certains votes créatifs,
+        restent à définir. Aucune vente, cotation
+        ni promesse de rendement n'est proposée
+        sur ce site.
+      </p>
+
+      <a href="#contact" class="button outline">
+        Suivre les actualités <span>↗</span>
+      </a>
+    </div>
+
+    <div class="token-facts">
+      <div>
+        <span>NOM</span>
+        <strong>KAMASUTRA</strong>
+      </div>
+      <div>
+        <span>SYMBOLE</span>
+        <strong>KAMA</strong>
+      </div>
+      <div>
+        <span>RÉSEAUX ENVISAGÉS</span>
+        <strong>BNB Smart Chain et Ethereum</strong>
+      </div>
+      <div>
+        <span>OFFRE PRÉVUE SUR BNB</span>
+        <strong>100 000 000 KAMA</strong>
+      </div>
+      <div>
+        <span>OFFRE PRÉVUE SUR ETHEREUM</span>
+        <strong>100 000 000 KAMA</strong>
+      </div>
+      <div>
+        <span>STATUT</span>
+        <strong>Non déployé sur les réseaux principaux</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact section" id="contact">
+  <p class="section-kicker">06 — RESTONS CONNECTÉS</p>
+
+  <h2>Le début d'une <em>histoire.</em></h2>
+
+  <p>
+    Pour découvrir les prochaines étapes
+    de la maison, enregistrer cette page
+    ou nous contacter lorsque nos coordonnées
+    officielles seront publiées.
+  </p>
+
+  <div class="contact-actions">
+    <button class="button gold" id="copySite">
+      Copier l'adresse du site <span>↗</span>
+    </button>
+    <span id="copyFeedback"
+      role="status" aria-live="polite"></span>
+  </div>
+
+  <p class="contact-note">
+    Les inscriptions à une newsletter et les
+    commandes seront activées uniquement
+    lorsqu'un service sécurisé et des coordonnées
+    officielles auront été configurés.
+  </p>
+</section>
 
 </main>
-
-<!-- PIED DE PAGE -->
 
 <footer>
   <div class="footer-main">
@@ -503,9 +663,7 @@
       KAMA<span>SUTRA</span>
       <small>MAISON DE CRÉATION</small>
     </div>
-
     <p>Une nouvelle expression de l'élégance.</p>
-
     <a href="#haut">Retour en haut ↑</a>
   </div>
 
@@ -522,6 +680,101 @@
 </footer>
 
 <script src="script.js"></script>
+
+<!-- FONCTIONNEMENT DU DIAPORAMA -->
+
+<script>
+(function () {
+  const showcase = document.querySelector(".kama-showcase");
+  if (!showcase) return;
+
+  const slides = [...showcase.querySelectorAll(".kama-slide")];
+  const dots = [...showcase.querySelectorAll(".kama-dot")];
+  const previous = document.getElementById("kamaPrev");
+  const next = document.getElementById("kamaNext");
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  let current = 0;
+  let timer = null;
+
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      const active = i === current;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      slide.querySelectorAll("a").forEach(link => {
+        link.tabIndex = active ? 0 : -1;
+      });
+    });
+
+    dots.forEach((dot, i) => {
+      const active = i === current;
+      dot.classList.toggle("active", active);
+      if (active) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  function stopAuto() {
+    if (timer !== null) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (reducedMotion.matches || document.hidden) return;
+    timer = setInterval(() => {
+      showSlide(current + 1);
+    }, 5000);
+  }
+
+  function navigate(index) {
+    showSlide(index);
+    startAuto();
+  }
+
+  previous.addEventListener("click", () => {
+    navigate(current - 1);
+  });
+
+  next.addEventListener("click", () => {
+    navigate(current + 1);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => navigate(i));
+  });
+
+  showcase.addEventListener("mouseenter", stopAuto);
+  showcase.addEventListener("mouseleave", startAuto);
+
+  showcase.addEventListener("focusin", stopAuto);
+  showcase.addEventListener("focusout", event => {
+    if (!showcase.contains(event.relatedTarget)) startAuto();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAuto();
+    else startAuto();
+  });
+
+  if (reducedMotion.addEventListener) {
+    reducedMotion.addEventListener("change", startAuto);
+  }
+
+  showSlide(0);
+  startAuto();
+})();
+</script>
 
 </body>
 </html>
