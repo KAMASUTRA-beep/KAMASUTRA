@@ -52,7 +52,7 @@ g.names.forEach((name,i)=>{
 const n=String(i+1).padStart(2,"0");
 const card=document.createElement("article");
 const img=document.createElement("img");
-img.src=g.prefix+"-"+n+".jpg";
+img.src=g.prefix+"-"+n+".png";
 img.alt="Concept KAMASUTRA "+name;
 img.loading="lazy";
 img.onerror=()=>{const fallback=document.createElement("div");fallback.className="photo";fallback.textContent=name;img.replaceWith(fallback)};
